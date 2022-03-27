@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FizzBuzzWeb_2.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
@@ -24,11 +25,11 @@ namespace FizzBuzzWeb_2.Pages
 
         public void OnGet()
         {
+            FizzBuzz = new();
             if (string.IsNullOrWhiteSpace(Name))
             {
                 Name = "User";
             }
-
         }
         public IActionResult OnPost()
         {
@@ -36,7 +37,6 @@ namespace FizzBuzzWeb_2.Pages
             {
                 return Page();
             }
-            else
             return RedirectToPage("./Privacy");
         }
 

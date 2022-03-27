@@ -8,10 +8,15 @@
     <h1 class="display-4">Welcome @Model.Name</h1>
     <form method="post">
         <label asp-for="FizzBuzz.Number"></label><br />
-        <input asp-for="FizzBuzz.Number" id="number" /><br /><br />
+        <input asp-for="FizzBuzz.Number" /><br /><br />
         <button type="submit" class="btn btn-primary">Zatwierdź</button><br />
+        @if (Model.FizzBuzz.Number.HasValue)
+        {
+            Model.FizzBuzz.IsValid(@Model.FizzBuzz.Number);
+            <span asp-validation-for="FizzBuzz.Number" class="alert alert-success"> @Model.FizzBuzz.ErrorMessage</span>
+        }
     </form><br />
-    <span asp-validation-for="FizzBuzz.Number" class="alert alert-success" id="txt"></span>
+
 </div>
 
 
