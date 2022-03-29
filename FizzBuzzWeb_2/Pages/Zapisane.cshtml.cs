@@ -1,16 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using FizzBuzzWeb_2.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
-namespace FizzBuzzWeb_2.Pages
+namespace FizzBuzzWeb_2
 {
-    public class ZapisaneModel : PageModel
+    public class Zapisane : PageModel
     {
+        public Member Member { get; set; }
+        public List<Member> members = new();
+
         public void OnGet()
         {
+            var data = HttpContext.Session.GetString("data");
+            if (data != null)
+                members =
+                JsonConvert.DeserializeObject<List<Member>>(data);
+
         }
     }
 }

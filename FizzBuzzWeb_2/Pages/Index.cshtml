@@ -7,16 +7,18 @@
 <div class="text-left">
     <h1 class="display-4">Welcome @Model.Name</h1>
     <form method="post">
-        <label asp-for="FizzBuzz.Number"></label><br />
-        <input asp-for="FizzBuzz.Number" /><br /><br />
-        <label asp-for="FizzBuzz.Name"></label><br />
-        <input asp-for="FizzBuzz.Name" /><br /><br />
+        <label asp-for="Member.Year"></label><br />
+        <input asp-for="Member.Year" /><br /><br />
+        <label asp-for="Member.Name"></label><br />
+        <input asp-for="Member.Name" /><br /><br />
         <button type="submit" class="btn btn-primary">Zatwierdź</button><br />
-        <span asp-validation-for="FizzBuzz.Number", class="alert-danger"></span>
-    @if(Model.users.Users!=null)
-        @foreach (var var in Model.users.Users)
+        <span asp-validation-for="Member.Year", class="alert-danger"></span>
+
+
+        @if(Model.members!=null)
+        @foreach (var var in Model.members)
         {
-            <p>@var.Name, @var.Number - @var.IsValid(Model.FizzBuzz.Number)</p><br/>
+            <p>@var.Name, @var.Year - @var.IsValid(Model.Member.Year)</p><br/>
         }
 
     </form><br />

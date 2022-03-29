@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FizzBuzzWeb_2.Models
 {
-    public class FizzBuzz 
+    public class Member
     {
         [Display(Name = "Rok urodzenia")]
 
         [Required(ErrorMessage ="uzupełnij dane"), Range(1899, 2022, ErrorMessage = "Oczekiwana wartość {0} z zakresu {1} i {2}.")]
-        public int? Number { get; set; }
+        public int? Year { get; set; }
 
         [Display(Name = "Imie")]
 

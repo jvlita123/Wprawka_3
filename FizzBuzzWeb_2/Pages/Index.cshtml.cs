@@ -12,9 +12,8 @@ namespace FizzBuzzWeb_2.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         [BindProperty]
-        public FizzBuzz FizzBuzz { get; set; }
-        public List<FizzBuzz> lista { get; set; }
-        public validation users = new();
+        public Member Member { get; set; }
+        public List<Member> members = new();
 
         [BindProperty(SupportsGet = true)]
 
@@ -27,7 +26,6 @@ namespace FizzBuzzWeb_2.Pages
 
         public void OnGet()
         {
-  
         }
 
         public IActionResult OnPost()
@@ -36,17 +34,15 @@ namespace FizzBuzzWeb_2.Pages
             {
                 var data = HttpContext.Session.GetString("data");
                 if (data != null)
-                    users.Users =
-                    JsonConvert.DeserializeObject<List<FizzBuzz>>(data);
+                    members =
+                    JsonConvert.DeserializeObject<List<Member>>(data);
 
-                users.Users.Add(FizzBuzz);
+                members.Add(Member);
 
                 HttpContext.Session.SetString("data",
-                JsonConvert.SerializeObject(users.Users));
+                JsonConvert.SerializeObject(members));
              
-
                 return Page();
-              //  return RedirectToPage("./SavedInSession");
             }
             return Page();
         }
