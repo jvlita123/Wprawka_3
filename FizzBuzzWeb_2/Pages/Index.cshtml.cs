@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-
-
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace FizzBuzzWeb_2.Pages
 {
@@ -11,8 +12,9 @@ namespace FizzBuzzWeb_2.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         [BindProperty]
-
         public FizzBuzz FizzBuzz { get; set; }
+        public List<FizzBuzz> lista { get; set; }
+        public validation users = new();
 
         [BindProperty(SupportsGet = true)]
 
@@ -25,20 +27,28 @@ namespace FizzBuzzWeb_2.Pages
 
         public void OnGet()
         {
-            FizzBuzz = new();
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                Name = "User";
-            }
+  
         }
+
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
-                return Page();
-            }
-            return RedirectToPage("./Privacy");
-        }
+                var data = HttpContext.Session.GetString("data");
+                if (data != null)
+                    users.Users =
+                    JsonConvert.DeserializeObject<List<FizzBuzz>>(data);
 
+                users.Users.Add(FizzBuzz);
+
+                HttpContext.Session.SetString("data",
+                JsonConvert.SerializeObject(users.Users));
+             
+
+                return Page();
+              //  return RedirectToPage("./SavedInSession");
+            }
+            return Page();
+        }
     }
 }

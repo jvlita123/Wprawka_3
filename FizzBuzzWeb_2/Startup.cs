@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace FizzBuzzWeb_2
 {
@@ -19,6 +20,16 @@ namespace FizzBuzzWeb_2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            // services.AddMemoryCache();
+            services.AddDistributedMemoryCache();//zamiast services.AddMemoryCache();
+            services.AddSession(options =>
+            {
+            options.IdleTimeout = TimeSpan.FromSeconds(10);
+            options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +52,8 @@ namespace FizzBuzzWeb_2
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
+
 
             app.UseEndpoints(endpoints =>
             {

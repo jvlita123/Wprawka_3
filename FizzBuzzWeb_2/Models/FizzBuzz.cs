@@ -1,16 +1,35 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FizzBuzzWeb_2.Models
 {
-    public class FizzBuzz : validation
+    public class FizzBuzz 
     {
-        [Display(Name = "Twój szczęśliwy numerek")]
+        [Display(Name = "Rok urodzenia")]
 
-        [Required, Range(1, 1000, ErrorMessage = "Oczekiwana wartość {0} z zakresu {1} i {2}.")]
-        [validation]
+        [Required(ErrorMessage ="uzupełnij dane"), Range(1899, 2022, ErrorMessage = "Oczekiwana wartość {0} z zakresu {1} i {2}.")]
         public int? Number { get; set; }
 
+        [Display(Name = "Imie")]
+
+        [Required(ErrorMessage = "uzupełnij dane"), MaxLength(100, ErrorMessage = "maksymalna długość imienia = 100")]
+
+        public string? Name { get; set; }
+
+        public string IsValid(object? number)
+        {
+            
+            if ((int)number % 100 != 0 && (int)number % 4 == 0 || (int)number % 400 == 0)
+            {
+                return "rok przestępny";
+            }
+            return "rok nie przestępny";
+        }
+
+
+
     }
+
 
 }

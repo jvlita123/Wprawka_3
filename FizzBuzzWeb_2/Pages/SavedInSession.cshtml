@@ -1,0 +1,10 @@
+﻿@page
+@model FizzBuzzWeb_2.SavedInSessionModel
+@{
+    ViewData["Title"] = "Data in session";
+}
+<p>Dane w zapisane w sesji</p>
+@foreach (var var in Model.users.Users)
+{
+    <p>@var.Name, @var.Number - @var.IsValid(var.Number)</p>
+}
