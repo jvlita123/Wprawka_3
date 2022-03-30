@@ -16,7 +16,6 @@ namespace FizzBuzzWeb_2.Pages
         public List<Member> members = new();
 
         [BindProperty(SupportsGet = true)]
-
         public string Name { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)

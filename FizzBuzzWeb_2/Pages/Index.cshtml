@@ -12,14 +12,15 @@
         <label asp-for="Member.Name"></label><br />
         <input asp-for="Member.Name" /><br /><br />
         <button type="submit" class="btn btn-primary">Zatwierdź</button><br />
-        <span asp-validation-for="Member.Year", class="alert-danger"></span>
+        <span asp-validation-for="Member.Year" , class=" alert-danger"></span>
 
 
-        @if(Model.members!=null)
-        @foreach (var var in Model.members)
-        {
-            <p>@var.Name, @var.Year - @var.IsValid(Model.Member.Year)</p><br/>
-        }
+        @if (Model.members != null)
+            @foreach (var var in Model.members)
+            {
+                var.IsValid(var.Name);
+                <p>@var.Name, @var.ErrorMessage @var.Year - @var.IsLeap(var.Year)</p><br />
+            }
 
     </form><br />
 

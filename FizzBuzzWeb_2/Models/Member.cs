@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FizzBuzzWeb_2.Models
 {
-    public class Member
+    public class Member :ValidationAttribute
     {
         [Display(Name = "Rok urodzenia")]
 
@@ -17,7 +17,7 @@ namespace FizzBuzzWeb_2.Models
 
         public string? Name { get; set; }
 
-        public string IsValid(object? number)
+        public string IsLeap(object? number)
         {
             
             if ((int)number % 100 != 0 && (int)number % 4 == 0 || (int)number % 400 == 0)
@@ -25,6 +25,20 @@ namespace FizzBuzzWeb_2.Models
                 return "rok przestępny";
             }
             return "rok nie przestępny";
+        }
+        
+        public override bool IsValid(object? value)
+        {
+            string array1 = Convert.ToString(value);
+
+            if (array1[^1] != 'a')
+            {
+                ErrorMessage = "urodził się w ";
+                return true;
+            }
+
+            ErrorMessage = "urodziła się w ";
+            return true;
         }
 
 

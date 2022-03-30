@@ -6,5 +6,5 @@
 <p>Dane w zapisane w sesji</p>
 @foreach (var var in Model.members)
 {
-    <p>@var.Name, @var.Year - @var.IsValid(var.Year)</p>
+    <p>@var.Name, @var.Year - @var.IsLeap(var.Year)</p>
 }
